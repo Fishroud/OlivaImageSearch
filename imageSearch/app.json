@@ -1,0 +1,13 @@
+{
+    "name" : "imageSearchfromSAUCENAO",
+    "namespace" : "imageSearch",
+    "priority" : 30000,
+    "message_mode" : "old_string",
+    "support" : [
+        {
+            "sdk" : "onebot",
+            "platform" : "qq",
+            "model" : "all"
+        }
+    ]
+}
