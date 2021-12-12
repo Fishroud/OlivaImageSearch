@@ -14,8 +14,9 @@ def searchImagebyUrl(img_url):
     }
     try:
         response=requests.post(url,files=files)
-    except Exception as e:
-        return e
+    except:
+        output = "服务器似乎走丢了，请稍后再试( ﾟA。)"
+        return output
     else:
         html = etree.HTML(response.text)
         result = html.xpath("/html/body/div[2]/div[3]/*")
@@ -52,14 +53,15 @@ def searchImagebyUrl(img_url):
                     image_code = "[CQ:image,file=" + html.xpath(image_url_xpath + '/@src')[0] + "]" + "\n"
                 output += image_code
                 source = html.xpath(source_xpath + '/strong[1]/text()')[0] + html.xpath(source_xpath + '/a/text()')[0] + "\n"
-                source += html.xpath(source_xpath + '/strong[2]/text()')[0]
+                if html.xpath(source_xpath + '/strong[2]/text()'):
+                    source += html.xpath(source_xpath + '/strong[2]/text()')[0]
                 if html.xpath(source_xpath + '/text()'):
                     source += html.xpath(source_xpath + '/text()')[0]
-                else:
+                if html.xpath(source_xpath + '/a[2]/text()'):
                     source += html.xpath(source_xpath + '/a[2]/text()')[0]
                 source += "\n" + html.xpath(source_xpath + '/a/@href')[0] + "\n"
                 output += source
             return output
         else:
-            output = "未检索到符合的图片"
+            output = "未检索到符合的图片( ´ρ`)"
             return output
