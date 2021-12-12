@@ -15,18 +15,17 @@ def unity_reply(plugin_event, Proc):
     if len(command_list) == 1:
         names = globals()
         key = 'input' + str(plugin_event.data.sender['user_id'])
-        if key in names.keys() and names['input' + str(plugin_event.data.sender['user_id'])]['sender'] == plugin_event.data.sender['user_id']:
-            if matchUrl:
-                plugin_event.reply(imageSearch.image.searchImagebyUrl(matchUrl.group(0)))
-                del names['input' + str(plugin_event.data.sender['user_id'])]
-                pass
-            '''
+        if key in names.keys() and names[key]['sender'] == plugin_event.data.sender['user_id']:
+            now_time = int(time.time())
+            time_diff = now_time - names[key]['time']
+            if time_diff < 30:
+                if matchUrl:
+                    plugin_event.reply(imageSearch.image.searchImagebyUrl(matchUrl.group(0)))
+                    del names[key]
             else:
-                plugin_event.reply(command_list[0])
-                del names['input' + str(plugin_event.data.sender['user_id'])]
-                pass
-            '''
-            
+                del names[key]
+
+
         elif command_list[0].lower() == "/imgs":
             plugin_event.reply("请发送待查询的图片")
             names = globals()
