@@ -43,12 +43,12 @@ def searchImagebyUrl(img_url):
                 image_url_xpath = '/html/body/div[2]/div[3]/div['+ str(i + 2) +']/table/tr/td[1]/div/a/img'
 
                 creator = "[" + html.xpath(similarity_xpath + '/text()')[0] + "]" 
-                if html.xpath(creator_xpath + '/strong/text()')[0]:
+                if html.xpath(creator_xpath + '/strong/text()'):
                     creator += html.xpath(creator_xpath + '/strong/text()')[0]
                 if html.xpath(creator_xpath + '/text()'):
                     creator += html.xpath(creator_xpath + '/text()')[0]
                 output += creator + "\n"
-                if html.xpath(image_url_xpath + '/@src')[0]:
+                if html.xpath(image_url_xpath + '/@src'):
                     image_code = "[CQ:image,file=" + html.xpath(image_url_xpath + '/@src')[0] + "]" + "\n"
                 output += image_code
                 source = html.xpath(source_xpath + '/strong[1]/text()')[0] + html.xpath(source_xpath + '/a/text()')[0] + "\n"
