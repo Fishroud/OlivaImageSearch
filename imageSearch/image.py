@@ -67,15 +67,20 @@ def searchImagebyUrl(img_url):
                 if html.xpath(image_url_xpath + '/@src'):
                     image_code = "[CQ:image,file=" + html.xpath(image_url_xpath + '/@src')[0] + "]" + "\n"
                 output += image_code
-                source = html.xpath(source_xpath + '/strong[1]/text()')[0] + html.xpath(source_xpath + '/a/text()')[0] + "\n"
+                source = ""
+                if html.xpath(source_xpath + '/strong[1]/text()'):
+                    source += html.xpath(source_xpath + '/strong[1]/text()')[0]
+                if html.xpath(source_xpath + '/a/text()'):
+                    source += html.xpath(source_xpath + '/a/text()')[0] + "\n"
                 if html.xpath(source_xpath + '/strong[2]/text()'):
                     source += html.xpath(source_xpath + '/strong[2]/text()')[0]
                 if html.xpath(source_xpath + '/text()'):
                     source += html.xpath(source_xpath + '/text()')[0]
                 if html.xpath(source_xpath + '/a[2]/text()'):
                     source += html.xpath(source_xpath + '/a[2]/text()')[0]
-                source += "\n" + html.xpath(source_xpath + '/a/@href')[0] + "\n"
-                output += source
+                if html.xpath(source_xpath + '/a/@href'):
+                    source += "\n" + html.xpath(source_xpath + '/a/@href')[0]
+                output += source + "\n"
             return output
         else:
             output = "未检索到符合的图片( ´ρ`)"

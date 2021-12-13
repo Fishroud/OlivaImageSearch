@@ -50,7 +50,7 @@ def unity_reply(plugin_event, Proc):
     elif len(command_list) == 2:
         if command_list[0].lower() == "/imgs":
             if command_list[1].lower() == "-v"  or command_list[0].lower() == "--version":
-                response = "imageSearchPlugin by Fishroud\nVersion 1.0"
+                response = "imageSearchPlugin by Fishroud\nVersion 1.0(ﾉ)`ω´(ヾ)"
                 plugin_event.reply(response)
             else:
                 response = imageSearch.image.searchImagebyUrl(command_list[1])
